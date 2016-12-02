@@ -32,7 +32,7 @@ class NumberPlaySolution:
 		return 	(self.operations == other.operations)
 		
 		
-	def evaluate(self, numbers):
+	def fitness(self, numbers):
 		"""
 		Evaluates the solution on the given numbers.
 		
@@ -49,9 +49,9 @@ class NumberPlaySolution:
 			The result of the computations.
 		"""
 		
-		total = 0
+		total = numbers[0]
 		
-		for i in xrange(len(numbers)-1):
+		for i in xrange(1, len(numbers)):
 			if self.operations[i] == '+':
 				total += numbers[i]
 			elif self.operations[i] == '*':
