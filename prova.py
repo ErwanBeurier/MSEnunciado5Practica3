@@ -1,13 +1,18 @@
+"""
+Just a test class that creates random individuals and 
+checks that the best individual fitness is 52
 
+"""
 
 
 import numpy as np
 numbers = [75, 3, 1, 4, 50, 6]
 fitVec = []
+mat = []
 
-for i in range(1,100000):
+for i in range(1,1000):
 	z = np.random.randint(3,size=(1,5))
-	
+	mat.append(z)
 	total = numbers[0]
 
 	for j in range(0, 5):
@@ -20,8 +25,12 @@ for i in range(1,100000):
 
 	fitVec.append(abs(852 -total))
 
-print np.shape(fitVec)
-#print fitVec
+order = np.argsort(fitVec)
+
+for i in range(0,20):
+	print fitVec[order[i]]
+	print mat[order[i]]
+
 print np.argmin(fitVec)
 print 'Best Fitness:\n'
 print fitVec[np.argmin(fitVec)]

@@ -1,39 +1,72 @@
 import numberplaysolution as nps
 import numpy as np
 
-N = 1000
-NM = 300
+"""
+Parameters
+	N          Population size
+
+	NM 		   Number of pairs to be crossed,
+		       giving birth to 2*NM children
+
+	iter       number of iterations
+
+	threshold  1-probability of mutation 
+			   (the lower the number, the higher
+			    the probability of mutation)
+
+	points     Number of times the offspring can mutate
+	    
+
+"""
+
+N = 30
+NM = 10
+iter = 500
+threshold = 0.1
+points = 1
 
 nps = nps.NumberPlaySolution(N)
 
-'''
-fit = nps.fitness(nps.numbers, nps.individualMatrix, N)
-#print fit
-order = nps.crossover(nps.individualMatrix, fit)
-#print order
-fit2 = nps.fitness(nps.numbers, order, len(order))
-#print fit2
-mutatedmat = nps.mutation(order, len(order), N)
-#print mutatedmat
-fit3 = nps.fitness(nps.numbers, mutatedmat, len(mutatedmat))
-#print fit3
-repmat = nps.replace(mutatedmat, fit3, N)
-print repmat
-fit4 = nps.fitness(nps.numbers, repmat, len(repmat))
-print fit4
-'''
-for i in range(0,400):
+itCounter = 0
+
+for i in range(0,iter):
 
 	fit = nps.fitness(nps.numbers, nps.individualMatrix, N)
-	
-	order = nps.crossover(nps.individualMatrix, fit, NM)
-	fit2 = nps.fitness(nps.numbers, order, len(order))
-	mutatedmat = nps.mutation(order, len(order), N)
-	fit3 = nps.fitness(nps.numbers, mutatedmat, len(mutatedmat))
-	repmat = nps.replace(mutatedmat, fit3, N)	
-	fit4 = nps.fitness(nps.numbers, repmat, len(repmat))
+	crossMat = nps.probCrossover(nps.individualMatrix, fit, NM)
+
+	fit2 = nps.fitness(nps.numbers, crossMat, len(crossMat))
+	mutatedMat = nps.mutation(crossMat, len(crossMat), N, threshold, points)
+
+	fit3 = nps.fitness(nps.numbers, mutatedMat, len(mutatedMat))
+	repMat = nps.replace(mutatedMat, fit3, N)
+
+	fit4 = nps.fitness(nps.numbers, repMat, len(repMat))
+	#print fit4[np.argmin(fit4)]             #Best individual fitness
+	print repMat[np.argmin(fit4)][:]        #Best individual
 	#print fit4
-	print fit4[np.argmin(fit4)]   #individuo migliore
-	print repmat[np.argmin(fit4)][:]
-	nps.individualMatrix = mutatedmat
-    
+	#print '\n'
+	nps.individualMatrix = repMat
+
+	print fit4
+	if fit4[np.argmin(fit4)] == 52:
+		break
+	itCounter +=1
+   
+	
+#print '\n'
+print 'Convergence at iteration number:', itCounter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
