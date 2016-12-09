@@ -16,20 +16,25 @@ Parameters
 
 	points     Number of times the offspring can mutate
 	    
-
+	TODO       mutation probability decreasing in times
 """
 
-N = 30
-NM = 10
-iter = 500
-threshold = 0.1
-points = 1
+N = 20
+NM = 5
+iterations = 500
+
+'''
+	Mutation variables
+'''	
+threshold = .5
+points = 2
 
 nps = nps.NumberPlaySolution(N)
 
 itCounter = 0
 
-for i in range(0,iter):
+for i in range(0,iterations):
+
 
 	fit = nps.fitness(nps.numbers, nps.individualMatrix, N)
 	crossMat = nps.probCrossover(nps.individualMatrix, fit, NM)
@@ -42,7 +47,7 @@ for i in range(0,iter):
 
 	fit4 = nps.fitness(nps.numbers, repMat, len(repMat))
 	#print fit4[np.argmin(fit4)]             #Best individual fitness
-	print repMat[np.argmin(fit4)][:]        #Best individual
+	#print repMat[np.argmin(fit4)][:]        #Best individual
 	#print fit4
 	#print '\n'
 	nps.individualMatrix = repMat
