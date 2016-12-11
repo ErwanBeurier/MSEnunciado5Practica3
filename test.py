@@ -21,13 +21,13 @@ Parameters
 
 N = 20
 NM = 5
-iterations = 500
+iterations = 1000
 
 '''
 	Mutation variables
 '''	
 threshold = .5
-points = 2
+points = 1
 
 nps = nps.NumberPlaySolution(N)
 
@@ -48,13 +48,13 @@ for i in range(0,iterations):
 	fit4 = nps.fitness(nps.numbers, repMat, len(repMat))
 	#print fit4[np.argmin(fit4)]             #Best individual fitness
 	#print repMat[np.argmin(fit4)][:]        #Best individual
-	#print fit4
-	#print '\n'
 	nps.individualMatrix = repMat
 
 	print fit4
-	if fit4[np.argmin(fit4)] == 52:
+
+	if float(fit4.count(fit4[np.argmin(fit4)]))/len(fit4) >= 0.95:
 		break
+
 	itCounter +=1
    
 	
