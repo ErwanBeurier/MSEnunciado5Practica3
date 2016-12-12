@@ -27,7 +27,7 @@ iterations = 1000
 	Mutation variables
 '''	
 threshold = .5
-points = 1
+points = 2
 
 nps = nps.NumberPlaySolution(N)
 

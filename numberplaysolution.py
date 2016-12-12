@@ -50,11 +50,11 @@ class NumberPlaySolution:
 
 			for j in range(0, 5):
 				if matrix[i][j] == 0:
-					total += numbers[j]
+					total += numbers[j+1]
 				elif matrix[i][j] == 1:
-					total *= numbers[j]
+					total *= numbers[j+1]
 				elif matrix[i][j] == 2:
-					total -= numbers[j]
+					total -= numbers[j+1]
 
 			fitVec.append(abs(852 -total)) # Attenzione che quando chiamo questa funzione senza 
 										   # valutare tutta la matrice potrebbe essere un problema	
