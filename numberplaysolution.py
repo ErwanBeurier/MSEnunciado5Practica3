@@ -141,7 +141,7 @@ class NumberPlaySolution:
 		order = []
 
 		for i in range(0,len(fitVec)):
-			probVec[i] = (1/fitVec[i]) 
+			probVec[i] = (1/(fitVec[i]+0.00001)) 
 			
 
 		probVec = probVec/(sum(probVec))

@@ -1,4 +1,4 @@
-import numberplaysolution as nps
+import numberplaysolution
 import numpy as np
 
 """
@@ -22,44 +22,58 @@ Parameters
 N = 20
 NM = 5
 iterations = 1000
+nSimul = 100
 
 '''
 	Mutation variables
 '''	
 threshold = .5
-points = 2
-
-nps = nps.NumberPlaySolution(N)
-
-itCounter = 0
-
-for i in range(0,iterations):
+points = 1
+bestFitVec = []
+meanVec = 0.
 
 
-	fit = nps.fitness(nps.numbers, nps.individualMatrix, N)
-	crossMat = nps.probCrossover(nps.individualMatrix, fit, NM)
+for v in range(0,nSimul):
 
-	fit2 = nps.fitness(nps.numbers, crossMat, len(crossMat))
-	mutatedMat = nps.mutation(crossMat, len(crossMat), N, threshold, points)
+	itCounter = 0
+	nps = numberplaysolution.NumberPlaySolution(N)
 
-	fit3 = nps.fitness(nps.numbers, mutatedMat, len(mutatedMat))
-	repMat = nps.replace(mutatedMat, fit3, N)
+	for i in range(0,iterations):
 
-	fit4 = nps.fitness(nps.numbers, repMat, len(repMat))
-	#print fit4[np.argmin(fit4)]             #Best individual fitness
-	#print repMat[np.argmin(fit4)][:]        #Best individual
-	nps.individualMatrix = repMat
 
-	print fit4
+		fit = nps.fitness(nps.numbers, nps.individualMatrix, N)
+		crossMat = nps.probCrossover(nps.individualMatrix, fit, NM)
 
-	if float(fit4.count(fit4[np.argmin(fit4)]))/len(fit4) >= 0.95:
-		break
+		fit2 = nps.fitness(nps.numbers, crossMat, len(crossMat))
+		mutatedMat = nps.mutation(crossMat, len(crossMat), N, threshold, points)
 
-	itCounter +=1
-   
-	
+		fit3 = nps.fitness(nps.numbers, mutatedMat, len(mutatedMat))
+		repMat = nps.replace(mutatedMat, fit3, N)
+
+		fit4 = nps.fitness(nps.numbers, repMat, len(repMat))
+		print fit4[np.argmin(fit4)]             #Best individual fitness
+		#print repMat[np.argmin(fit4)][:]        #Best individual
+		nps.individualMatrix = repMat
+
+		#print fit4
+
+		itCounter +=1
+
+		if float(fit4.count(fit4[np.argmin(fit4)]))/len(fit4) >= 0.95:
+			break
+					
+	bestFitVec.append(fit4[np.argmin(fit4)])		
+	meanVec += itCounter
+	#print itCounter
+
+print 'Average number of iterations'
+print '\n'
+print meanVec/nSimul
+print '\n'
+print 'BestFitVEc'
+print bestFitVec
 #print '\n'
-print 'Convergence at iteration number:', itCounter
+#print 'Convergence at iteration number:', itCounter
 
 
 
