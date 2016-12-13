@@ -8,7 +8,9 @@ Parameters
 	NM 		   Number of pairs to be crossed,
 		       giving birth to 2*NM children
 
-	iter       number of iterations
+	iterations number of iterations
+
+	nSimul     number of times the simulation is run
 
 	threshold  1-probability of mutation 
 			   (the lower the number, the higher
@@ -16,7 +18,7 @@ Parameters
 
 	points     Number of times the offspring can mutate
 	    
-	TODO       mutation probability decreasing in times
+	
 """
 
 N = 20
