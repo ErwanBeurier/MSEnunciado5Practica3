@@ -51,7 +51,7 @@ for v in range(0,nSimul):
 		repMat = nps.replace(mutatedMat, fit3, N)
 
 		fit4 = nps.fitness(nps.numbers, repMat, len(repMat))
-		print fit4[np.argmin(fit4)]             #Best individual fitness
+		#print fit4[np.argmin(fit4)]             #Best individual fitness
 		#print repMat[np.argmin(fit4)][:]        #Best individual
 		nps.individualMatrix = repMat
 
@@ -61,7 +61,7 @@ for v in range(0,nSimul):
 
 		if float(fit4.count(fit4[np.argmin(fit4)]))/len(fit4) >= 0.95:
 			break
-					
+
 	bestFitVec.append(fit4[np.argmin(fit4)])		
 	meanVec += itCounter
 	#print itCounter
